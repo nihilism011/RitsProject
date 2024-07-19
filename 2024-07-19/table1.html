@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table{
+            /* caption-side: bottom; */
+            border : 10px dashed rgb(235, 49, 235);
+            /* border-style:solid ; */
+            /* border-color: blue; */
+            /* border-width: 10px; */
+            border-collapse: collapse;
+        }
+        td, th{
+            padding : 10px 20px;
+            /* padding : 5px 10px 15px 20px;  상 우 하 좌 */
+            text-align: center;
+            border : 5px dotted red;
+        }
+        .bc{
+            background-color: rgb(42,165,130);
+        }
+    </style>
+</head>
+<body>
+    <table border="1">
+        <caption>시험 성적</caption>
+        <col class="bc"></col>
+        <col></col>
+        <col></col>
+        <col></col>
+        <tr class="bc"> 
+            <th>이름</th>
+            <th>자바</th>
+            <th>오라클</th>
+            <th>html</th>
+        </tr>
+        <tr>
+            <td>홍길동</td>
+            <td>30</td>
+            <td>50</td>
+            <td>80</td>
+        </tr>
+        <tr>
+            <td class="bc">김철수</td>
+            <td>80</td>
+            <td>80</td>
+            <td>80</td>
+        </tr>
+        <tr>
+            <td class="bc">박영희</td>
+            <td>90</td>
+            <td>90</td>
+            <td>85</td>
+        </tr>
+    </table>
+</body>
+</html>
