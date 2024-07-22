@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box1 {
+            box-sizing: border-box;
+            border: 10px solid red;
+            width: 100px;
+            height: 100px;
+            background-color: black;
+            text-align: center;
+            line-height: 40px;
+            padding: 20px;
+            color: aliceblue;
+            margin: 20px;
+        }
+        .box2 {
+            box-sizing: border-box;
+            border: 10px solid red;
+            width: 100px;
+            height: 100px;
+            background-color: black;
+            text-align: center;
+            line-height: 40px;
+            padding: 20px;
+            color: aliceblue;
+            margin: 20px;
+        }
+
+        .shadow1 {
+            box-shadow: 5px 5px 10px 10px pink;
+        }
+
+        .shadow2 {
+            box-shadow: 5px 5px 5px 5px skyblue;
+        }
+        div[class ~="box1"]{
+            border-radius: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box1 shadow2" style="border:10px solid blue;">box</div>
+    <div class="box2 shadow1">box</div>
+    <div class="box1">box3</div>
+</body>
+
+</html>
