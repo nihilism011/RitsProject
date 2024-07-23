@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input placeholder="첫번째 숫자" />
+    <input placeholder="두번째 숫자" />
+    <button onclick="plus()">더하기</button>
+    <div id="result">Hi~</div>
+  </body>
+</html>
+<script>
+  function plus() {
+    var item = document.querySelector("#result");
+    var list = document.getElementsByTagName("input");
+    var sum = 0;
+    for (var i = 0; i < list.length; i++) {
+      sum += parseInt(list.item(i).value);
+    }
+    item.innerHTML = "<h1 style='color:red;'>" + sum + "</h1>";
+  }
+</script>

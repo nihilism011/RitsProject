@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div>
+      <button onclick="colorTagName()">Click!</button>
+      <button onclick="colorClassName()">Click!</button>
+      <button onclick="colorQuery1()">Query1</button>
+      <button onclick="colorQuery2()">Query2</button>
+    </div>
+    <p class="back-yellow big">과목 목록</p>
+    <ul class="big">
+      <li>First</li>
+      <li>Second</li>
+      <li class="back-yellow">Third</li>
+      <li>Forth</li>
+      <li>Fifth</li>
+    </ul>
+  </body>
+</html>
+<script>
+  function colorTagName() {
+    var list = document.getElementsByTagName("li");
+    console.log(list.item(0));
+    for (var i = 0; i < list.length; i++) {
+      if (list.item(i).style.color == "red") {
+        list.item(i).style.color = "blue";
+      } else {
+        list.item(i).style.color = "red";
+      }
+    }
+  }
+  function colorClassName() {
+    var list = document.getElementsByClassName("back-yellow");
+    console.log(list.item(0));
+    for (var i = 0; i < list.length; i++) {
+      if (list.item(i).style.backgroundColor == "yellow") {
+        list.item(i).style.backgroundColor = "green";
+      } else {
+        list.item(i).style.backgroundColor = "yellow";
+      }
+    }
+  }
+  function colorQuery1() {
+    var item = document.querySelector("p");
+    item.style.color = "blue";
+  }
+  function colorQuery2() {
+    var list = document.querySelectorAll("li");
+    console.log(list);
+    for (var i = 0; i < list.length; i++) {
+      if (list.item(i).style.color == "purple") {
+        list.item(i).style.color = "aqua";
+      } else {
+        list.item(i).style.color = "purple";
+      }
+    }
+  }
+</script>

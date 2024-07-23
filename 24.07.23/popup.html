@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button onclick="pageMove()">page move</button>
+    <button onclick="pageclose()">page close</button>
+    <button onclick="popUp()">pop up</button>
+    <button onclick="popUp2()">pop up2</button>
+  </body>
+</html>
+<script>
+  function pageMove() {
+    location.href = "http://emfprhs011.dothome.co.kr/projectA.html";
+  }
+  function pageclose() {
+    window.close();
+  }
+  function popUp() {
+    window.open("text2.html", "pop", "width = 500, height = 500");
+  }
+  function popUp2() {
+    var wi = 500;
+    var he = 500;
+    var widthleft = (screen.availWidth - wi) / 2;
+    var heighttop = (screen.availHeight - he) / 2;
+    window.open(
+      "test3.html",
+      "pop",
+      `width = ${wi}, height = ${he}, left =${widthleft}, top =${heighttop}`
+    );
+  }
+</script>

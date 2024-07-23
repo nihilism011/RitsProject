@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="big">점심시간 전 마지막</div>
+    <input placeholder="color" class="big" />
+    <button onclick="changeColor()">Text Color Change</button>
+  </body>
+</html>
+<script>
+  function changeColor() {
+    var item = document.querySelector("div");
+    var icolor = document.querySelector("input");
+    item.style.color = icolor.value;
+    icolor.style.color = icolor.value;
+  }
+</script>

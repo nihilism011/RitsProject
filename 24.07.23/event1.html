@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <img src="Image/중독입니다.jfif" id="img1" />
+  </body>
+</html>
+<script>
+  var obj = document.querySelector("#img1");
+  obj.onclick = function (e) {
+    // obj.src = "Image/randombox2.jpg";
+    // console.log("이벤트 유형 ==>", e.type);
+    // console.log("이벤트 X 위치 ==>", e.pageX);
+    // console.log("이벤트 Y 위치 ==>", e.pageY);
+    // console.log("이벤트  ==>", e);
+  };
+  // obj.addEventListener("mouseover", function () {
+  //   alert("!!!!!?!!!!!");
+  // });
+  obj.addEventListener("mouseover", () => {
+    obj.src = "Image/randombox2.jpg";
+  });
+  obj.addEventListener("mouseout", () => {
+    obj.src = "Image/중독입니다.jfif";
+  });
+</script>
