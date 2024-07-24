@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div><button id="addList">add</button></div>
+    <div><button id="addListBefore">insert before</button></div>
+    <div><button id="create">create!</button></div>
+    <div><button id="createAttr">createAttrivute</button></div>
+    <div><button id="remove">remove</button></div>
+    <div><button id="removeAttr">removeAttrivute</button></div>
+    <div><button id="clone">clone</button></div>
+    <h3 id="js">js</h3>
+    <div id="list">
+      <p>java</p>
+      <p id="oracle" style="color: blue">oracle</p>
+      <p>html</p>
+    </div>
+  </body>
+</html>
+<script>
+  document.querySelector("#addList").onclick = function () {
+    var list = document.getElementById("list");
+    var js = document.getElementById("js");
+    list.appendChild(js); //list 마지막에 js 이동 @여기서 js는 id 로 js를 가지는 태그
+  };
+  document.querySelector("#addListBefore").onclick = function () {
+    var list = document.getElementById("list");
+    var js = document.getElementById("js");
+    var oracle = document.getElementById("oracle");
+    list.insertBefore(js, oracle); //oracle 요소 전에 js요소를 이동
+  };
+  document.querySelector("#create").onclick = function () {
+    var list = document.getElementById("list");
+    var jquery = document.createElement("p"); //p태그 객체 생성
+    jquery.innerHTML = "jquery"; //위에서 만든 p태그에 내용 추가
+    list.appendChild(jquery); //리스트 태그에 마지막에 추가
+  };
+  document.querySelector("#createAttr").onclick = () => {
+    var list = document.getElementById("list");
+    var jquery = document.createElement("p"); //p태그 객체 생성
+    jquery.innerHTML = "jquery"; //위에서 만든 p태그에 내용 추가
+    var attr = document.createAttribute("style"); //style 속성 만들기
+    attr.value = "color:red; font-weight:bold;"; //만든 style 속성에 값 넣기.
+    jquery.setAttributeNode(attr); //jquery에 위에서 만든 속성을 붙여줌.
+    list.appendChild(jquery);
+  };
+  document.querySelector("#remove").onclick = () => {
+    var list = document.getElementById("list");
+    var oracle = document.getElementById("oracle");
+    list.removeChild(oracle); //자식 요소 삭제
+  };
+  document.querySelector("#removeAttr").onclick = () => {
+    var oracle = document.getElementById("oracle");
+    oracle.removeAttribute("style");
+  };
+  document.querySelector("#clone").onclick = () => {
+    var list = document.getElementById("list");
+    var js = document.getElementById("js");
+    list.appendChild(js.cloneNode(true)); //list 마지막에 js 복사해서 추가
+  };
+</script>

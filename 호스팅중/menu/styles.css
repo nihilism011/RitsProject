@@ -1,0 +1,65 @@
+body {
+  background-color: #bababa;
+}
+body,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+/* 기본 css 제거 */
+.top-bar-menu ul ul {
+  display: none;
+}
+/* 가운데 정렬 */
+.con {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* 사이트 최소 너비 설정 */
+.con-min-width {
+  min-width: 1200px;
+}
+
+/* 실질적으로 메뉴에 사용할 너비 설정 */
+.top-bar > .con {
+  width: 600px;
+}
+
+/* 실질적으로 메뉴에 사용할 너비 설정 */
+.top-bar-menu > ul > li {
+  display: inline-block;
+  position: relative;
+}
+.top-bar-menu > ul > li > ul {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+}
+
+/* 문자열 가운데 정렬 */
+.top-bar-menu {
+  text-align: center;
+  margin-top: 100px;
+}
+
+.top-bar-menu ul {
+  background-color: black;
+  color: white;
+  border-radius: 8px;
+}
+.top-bar-menu ul > li:hover > a {
+  background-color: #555;
+}
+
+/* 2차 메뉴 */
+.top-bar-menu > ul > li:hover > ul {
+  display: block;
+}

@@ -1,0 +1,83 @@
+@keyframes ani2 {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(1080deg);
+  }
+  100% {
+    transform: rotate(-1080deg);
+  }
+}
+@keyframes ani3 {
+  0% {
+    transform: rotate(0deg);
+  }
+  10% {
+    background: radial-gradient(
+      circle at 30% 30%,
+      black 15%,
+      red 30%,
+      black,
+      red
+    );
+    transform: rotate(405deg);
+  }
+  50% {
+    background: radial-gradient(
+      circle at 70% 70%,
+      black 15%,
+      blue 30%,
+      black,
+      blue
+    );
+    transform: rotate(405deg) rotateX(180deg);
+  }
+  100% {
+    background: radial-gradient(
+      circle at 70% 70%,
+      black 15%,
+      red 30%,
+      black,
+      red
+    );
+    transform: rotateX(0deg) rotateY(0deg);
+  }
+}
+.anibox {
+  display: inline-block;
+  width: 150px;
+  height: 150px;
+  border: 1px solid #eee;
+  background: gray;
+  margin: 40px;
+  line-height: 200px;
+  /* animation-name: ani2;
+  animation-duration: 3s;
+  animation-delay: 1s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease; */
+  animation: ani2 3s infinite;
+  background: radial-gradient(
+    circle at 30% 30%,
+    black 15%,
+    red 30%,
+    black,
+    red
+  );
+}
+.anibox2 {
+  display: inline-block;
+  width: 150px;
+  height: 150px;
+  border: 1px solid #eee;
+  background: gray;
+  margin: 40px;
+  line-height: 200px;
+  /* animation-name: ani2;
+  animation-duration: 3s;
+  animation-delay: 1s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease; */
+  animation: ani3 3s infinite;
+}

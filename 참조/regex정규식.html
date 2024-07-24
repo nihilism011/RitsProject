@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #container {
+        text-align: center;
+        width: 500px;
+        border: 3px solid black;
+        margin: 20px auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <!-- 숫자만 넣고 싶은 text 인풋 박스 -->
+      <input id="tel" type="text" placeholder="only number" />
+      <!-- 정규식 체크를 실행할 버튼 -->
+      <button id="numRegex">Check</button>
+    </div>
+  </body>
+</html>
+<script>
+  document.querySelector("#numRegex").onclick = function () {
+    // 숫자만 걸러주는 정규식
+    var regex = /^[0-9]*$/;
+    // 인풋박스 벨류값
+    var phone = document.querySelector("#tel").value;
+    // 정규식.text(변수) > 변수가 정규식에 합당하면 true 아니면 false
+    if (regex.test(phone)) {
+      alert("ok");
+    } else {
+      alert("no");
+    }
+  };
+</script>

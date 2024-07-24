@@ -1,0 +1,65 @@
+.contents {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  padding: 40px;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.5);
+  box-sizing: border-box;
+  box-shadow: 0 15px 25px;
+  border-radius: 10px;
+}
+.contents h2 {
+  margin: 0 0 30px;
+  padding: 0;
+  color: #fff;
+  text-align: center;
+}
+.contents .user-info {
+  position: relative;
+}
+.contents .user-info input {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #fff;
+  margin-bottom: 30px;
+  border: none;
+  border-bottom: 1px solid #fff;
+  outline: none;
+  background: transparent;
+}
+.contents .user-info label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 10px 0;
+  font-size: 16px;
+  color: white;
+  pointer-events: none;
+  transition: 0.5s;
+}
+.contents .user-info input:focus ~ label,
+.contents .user-info input:valid ~ label {
+  top: -20px;
+  left: 0;
+  color: #fff;
+  font-size: 12px;
+}
+.button {
+  background-color: #fff;
+  display: inline-block;
+  width: 80px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 1px 2px 5px #222222;
+}
+.button:hover {
+  box-shadow: 1px 3px 6px #222222;
+}
+.button:active {
+  box-shadow: 0px 1px 3px #222222;
+}

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      input,
+      button {
+        font-size: 30px;
+        width: 100px;
+      }
+      div {
+        font-size: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <input id="ho" />행<input id="col" />열<button id="creat">create!</button>
+    </div>
+    <section id="section">
+      <table style="border: 1px solid black"></table>
+    </section>
+  </body>
+</html>
+<script>
+  document.querySelector("#creat").onclick = () => {
+    var ho = document.querySelector("#ho").value;
+    var col = document.querySelector("#col").value;
+    var sect = document.querySelector("#section");
+    var table = document.createElement("table");
+    sect.appendChild(table);
+    var attr = document.createAttribute("style");
+    var attr2 = document.createAttribute("border");
+
+    attr.value = "border: 2px solid black;border-collapse: collapse;";
+    attr2.value = "1";
+    table.setAttributeNode(attr);
+    table.setAttributeNode(attr2);
+    for (var i = 0; i < ho; i++) {
+      var trs = document.createElement("tr");
+
+      if (i == 0) {
+        var attr5 = document.createAttribute("style");
+        attr5.value = "background-color: greenyellow;";
+        trs.setAttributeNode(attr5);
+      }
+      table.appendChild(trs);
+      for (var j = 0; j < col; j++) {
+        var attr3 = document.createAttribute("style");
+
+        var tds = document.createElement("td");
+        if (j == 0) {
+          attr3.value =
+            "font-size:30px;padding: 10px; background-color: greenyellow;";
+        } else {
+          attr3.value =
+            "font-size:30px;padding: 10px;background-color: black;color:white; ";
+        }
+        tds.setAttributeNode(attr3);
+        trs.appendChild(tds);
+        if (j == 0) {
+          tds.innerHTML = `${i + 1}행`;
+        } else {
+          tds.innerHTML = `${i + 1},${j}`;
+        }
+      }
+    }
+  };
+</script>
