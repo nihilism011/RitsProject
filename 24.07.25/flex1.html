@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #container {
+        /* width: 500px; */
+        /* height: 200px; */
+
+        border: 1px solid purple;
+        background-color: #eee;
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        flex-flow: row nowrap;
+      }
+      .box {
+        width: 100px;
+        height: 100px;
+        line-height: 100px;
+        text-align: center;
+        background-color: black;
+        color: #eee;
+        margin: 5px;
+      }
+      .type1 {
+        /* justify-content: space-between; */
+        align-items: center;
+      }
+      .type2 {
+        /* justify-content: space-around; */
+        align-items: stretch;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container" class="type1">
+      <div class="box">1</div>
+      <div class="box">2</div>
+      <div class="box">3</div>
+      <div class="box">4</div>
+      <div class="box">5</div>
+    </div>
+    <div id="container" class="type2">
+      <div class="box">1</div>
+      <div class="box">2</div>
+      <div class="box">3</div>
+      <div class="box">4</div>
+      <div class="box">5</div>
+    </div>
+  </body>
+</html>
