@@ -1,0 +1,165 @@
+/* 전체 배경 및 기본 설정 */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Arial", sans-serif;
+  background-color: #121212;
+  color: #e0e0e0;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* 라이트 모드 설정 */
+body.light-mode {
+  background-color: #f0f0f0;
+  color: #121212;
+}
+
+/* 컨테이너 스타일 */
+#container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* 메인 메뉴 스타일 */
+#main-menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1f1f1f;
+  padding: 20px;
+  font-size: 24px;
+  border-bottom: 1px solid #444444;
+  transition: background-color 0.3s;
+}
+
+body.light-mode #main-menu {
+  background-color: #ffffff;
+}
+
+/* 테마 버튼 스타일 */
+.theme-buttons {
+  display: flex;
+  align-items: center;
+}
+
+.theme-buttons img {
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  margin: 0 10px;
+  transition: opacity 0.3s;
+}
+
+.theme-buttons img:hover {
+  opacity: 0.7;
+}
+
+/* 네비게이션 스타일 */
+#navi {
+  position: fixed;
+  top: 70px; /* 메인 메뉴의 높이만큼 아래로 설정 */
+  right: 0;
+  width: 200px;
+  height: calc(100% - 70px); /* 전체 높이에서 메인 메뉴의 높이를 뺌 */
+  background-color: #1f1f1f;
+  padding: 20px;
+  overflow-y: auto;
+  transition: background-color 0.3s;
+}
+
+body.light-mode #navi {
+  background-color: #ffffff;
+}
+
+#navi h3 {
+  color: #ffffff;
+  border-bottom: 1px solid #444444;
+  padding-bottom: 10px;
+}
+
+body.light-mode #navi h3 {
+  color: #121212;
+}
+
+#navi ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+#navi li {
+  margin: 15px 0;
+}
+
+#navi a {
+  text-decoration: none;
+  color: #add8e6; /* 밝은 파스텔 하늘색 */
+  font-size: 18px;
+  transition: color 0.3s;
+}
+
+#navi a:hover {
+  color: #e0ffff; /* 더 밝은 파스텔 하늘색 */
+}
+
+body.light-mode #navi a {
+  color: #007acc;
+}
+
+body.light-mode #navi a:hover {
+  color: #005f99;
+}
+
+/* 콘텐츠 스타일 */
+#contents {
+  margin-right: 220px; /* 네비게이션의 폭만큼 마진 추가 */
+  padding: 20px;
+  overflow-y: auto;
+}
+
+#contents h2 {
+  color: #add8e6; /* 밝은 파스텔 하늘색 */
+  border-bottom: 1px solid #444444;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  transition: color 0.3s;
+}
+
+body.light-mode #contents h2 {
+  color: #007acc;
+}
+
+.display {
+  background-color: #2c2c2c;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin-bottom: 40px;
+  transition: background-color 0.3s;
+}
+
+body.light-mode .display {
+  background-color: #ffffff;
+}
+
+/* 스크롤바 스타일 */
+#contents::-webkit-scrollbar {
+  width: 8px;
+}
+
+#contents::-webkit-scrollbar-thumb {
+  background-color: #444444;
+  border-radius: 10px;
+}
+
+#contents::-webkit-scrollbar-thumb:hover {
+  background-color: #555555;
+}
+
+body.light-mode #contents::-webkit-scrollbar-thumb {
+  background-color: #cccccc;
+}
+
+body.light-mode #contents::-webkit-scrollbar-thumb:hover {
+  background-color: #bbbbbb;
+}
