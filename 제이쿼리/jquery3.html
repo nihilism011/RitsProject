@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.js"
+      integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <ul>
+      <li>자바</li>
+      <li>오라클</li>
+      <li><span>html</span></li>
+      <li>javascript</li>
+      <li>jquery</li>
+    </ul>
+    <button id="btn">click!</button>
+  </body>
+</html>
+<script>
+  $("#btn").on("click", () => {
+    // $("li:has(span)").css("color", "red"); //li태그 아래 span태그
+    // $("li:eq(2)").css("color", "red"); //li태그 자식 요소 인덱스2 인 태그
+    // $("li:gt(2)").css("color", "red"); //li태그 자식 요소 인덱스값>2 인 태그
+    // $("li:lt(2)").css("color", "red"); //li태그 자식 요소 인덱스값<2 인 태그
+    // $("li:odd").css("color", "red"); //li태그 자식 요소 인덱스값이 짝수 (사실상 홀수번째)
+    // $("li:even").css("color", "red"); //li태그 자식 요소 인덱스값이 홀수 (사실상 짝수번째)
+    // $("li:first").css("color", "red"); //li태그 자식 요소 첫번째
+    // $("li:last").css("color", "red"); //li태그 자식 요소 마지막
+    var items = $("li");
+    console.log(items);
+  });
+</script>

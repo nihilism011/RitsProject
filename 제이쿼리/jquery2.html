@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="jquery-3.7.1.min.js"></script>
+  </head>
+  <body>
+    <img src="Image/바밀로-고래.jpg" alt="바밀로 고래" />
+    <button id="btn">click</button>
+  </body>
+</html>
+<script>
+  $("#btn").on("click", () => {
+    $("img").attr("src", "Image/바밀로-매화.jpg");
+  });
+</script>

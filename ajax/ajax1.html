@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="jquery-3.7.1.min.js"></script>
+    <style>
+      th,
+      tr,
+      td {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="btn">호출!</button>
+    <hr />
+  </body>
+</html>
+<script>
+  $("#btn").on("click", () => {
+    $.ajax({
+      url: "https://jsonplaceholder.typicode.com/users",
+      dataType: "json",
+      type: "GET",
+      data: {},
+      success: function (data) {
+        var row = data.length;
+        var body = $("body");
+        var table = $("<table></table>");
+        body.append(table);
+        var ts = $("<tr></tr>");
+        table.append(ts);
+        ts.append("<th>번호</th>");
+        ts.append("<th>이름</th>");
+        ts.append("<th>이메일</th>");
+        for (var i = 0; i < data.length; i++) {
+          var tr = $("<tr></tr>");
+          table.append(tr);
+          tr.append(`<td>${data[i].id}</td>`);
+          tr.append(`<td>${data[i].name}</td>`);
+          tr.append(`<td>${data[i].email}</td>`);
+        }
+      },
+    });
+  });
+</script>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="jquery-3.7.1.min.js"></script>
+  </head>
+  <body>
+    <label><input type="checkbox" checked /><span>자바</span></label
+    ><br />
+    <label><input type="checkbox" /><span>오라클</span></label
+    ><br />
+    <label><input type="checkbox" /><span>html/css</span></label
+    ><br />
+    <label><input type="checkbox" /><span>javascript</span></label
+    ><br />
+    <hr />
+    <label
+      ><input type="radio" checked name="subject" value="java" /><span
+        >자바</span
+      ></label
+    ><br />
+    <label
+      ><input type="radio" name="subject" value="oracle" /><span
+        >오라클</span
+      ></label
+    ><br />
+    <label
+      ><input type="radio" name="subject" value="html" /><span
+        >html/css</span
+      ></label
+    ><br />
+    <label
+      ><input type="radio" name="subject" value="js" /><span
+        >javascript</span
+      ></label
+    ><br />
+    <div>
+      <button id="btn">checkbox btn!</button>
+      <button id="btn2">radio btn!</button>
+    </div>
+  </body>
+</html>
+<script>
+  $("#btn").on("click", () => {
+    $("input[type='checkbox']:checked").next().css("color", "red"); //체크된 input박스 바로 뒤의 태그의 css변경
+  });
+  $("#btn2").on("click", () => {
+    $("input[name='subject']:checked").next().css("color", "red");
+    var item = $("input[name='subject']:checked");
+    console.log(item.val());
+  });
+</script>
