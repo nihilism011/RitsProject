@@ -36,15 +36,15 @@
           <th>웹사이트</th>
           <th></th>
         </tr>
-        <tr v-for="(item, index) in list">
+        <tr v-for="(i, index) in list">
           <td>{{index+1}}</td>
           <td>
-            <span v-if="index<5" style="color: blue">{{item.name}}</span>
-            <span v-else>{{item.name}}</span>
+            <span v-if="index<5" style="color: blue">{{i.name}}</span>
+            <span v-else>{{i.name}}</span>
           </td>
-          <td>{{item.email}}</td>
-          <td>{{item.website}}</td>
-          <td><button @click="fnInfo(item)">상세보기</button></td>
+          <td>{{i.email}}</td>
+          <td>{{i.website}}</td>
+          <td><button @click="fnInfo(i)">상세보기</button></td>
         </tr>
       </table>
       <div v-if="isInfo" class="info">
