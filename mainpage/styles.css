@@ -1,0 +1,116 @@
+.top-menu-bar {
+  background: darkslateblue;
+  padding: 15px;
+  border-radius: 5px;
+}
+.top-menu-bar a {
+  color: white;
+  padding: 10px;
+}
+.keybodardImg {
+  position: relative;
+  width: 100%;
+  height: auto;
+  margin-top: 40px;
+}
+.keybodardImg img {
+  width: 100%;
+  display: block;
+}
+.keyboard-sell {
+  display: flex;
+  flex-flow: row wrap;
+}
+.keyboard {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  text-align: center;
+  align-items: center;
+  margin: 20px;
+}
+div {
+  /* border: 1px solid black; */
+  box-sizing: border-box;
+}
+.black-bg {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.6);
+  position: fixed;
+  justify-content: center;
+  padding: 20px;
+  z-index: 9999;
+}
+.white-bg {
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 8px;
+  overflow: auto;
+  padding: 0px;
+}
+h3 {
+  cursor: pointer;
+}
+.img-click {
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  cursor: pointer;
+}
+.keybodardImg:hover .img-click {
+  opacity: 1;
+}
+.keyboard button {
+  margin: 1rem;
+  color: #6fbfea;
+  transition: 0.3s;
+  border-radius: 4px;
+  border: 1px solid #6fbfea;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  background-color: white;
+  font-size: 15px;
+  &:hover {
+    background-color: #6fbfea;
+    color: white;
+  }
+}
+.white-bg img {
+  width: 800px;
+}
+/* 스크롤바 전체 스타일 */
+::-webkit-scrollbar {
+  width: 12px; /* 스크롤바의 너비 */
+  height: 8px; /* 수평 스크롤바의 높이 */
+}
+
+/* 스크롤바의 트랙(배경) 스타일 */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* 트랙 배경 색상 */
+}
+
+/* 스크롤바의 thumb(스크롤바 이동 블록) 스타일 */
+::-webkit-scrollbar-thumb {
+  background-color: #6fbfea; /* 메인 색상 */
+  border-radius: 10px; /* 둥근 모서리 */
+  border: 2px solid #f1f1f1; /* 테두리 색상 */
+  min-height: 10%; /* 최소 높이 설정 */
+  min-width: 20px; /* 수평 스크롤바의 최소 너비 설정 */
+}
+
+/* 스크롤바의 thumb가 호버될 때 스타일 */
+::-webkit-scrollbar-thumb:hover {
+  background: #5ba6d1; /* 호버 색상 */
+}

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rits page</title>
+    <script src="jquery-3.7.1.min.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js"></script>
+    <!-- <script src="vue.js"></script> -->
+  </head>
+  <body id="app">
+    <div class="black-bg" v-if="infoState" @click="infoState= !infoState">
+      <div class="white-bg" @click.stop>
+        <img :src="info.infoimg" />
+      </div>
+    </div>
+    <div class="container">
+      <div class="top-menu-bar">
+        <a v-for="menu in menuname" :key="menu">{{menu}}</a>
+      </div>
+      <div class="keyboard-sell">
+        <div v-for="(item, index) in item" :key="index" class="keyboard">
+          <div class="keybodardImg">
+            <img :src="item.imgs" />
+            <div class="img-click" @click="nameClick(item)">상세보기</div>
+          </div>
+          <h3 @click="nameClick(item)">{{item.name}}</h3>
+          <p>{{item.price}} 만원</p>
+          <button @click="item.cnt++">Click!</button>
+          <span>추천수 : {{item.cnt}}</span>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+<script type="module">
+  import data from "./script.js";
+  const app = Vue.createApp({
+    data() {
+      return {
+        infoState: false,
+        menuname: ["Home", "Shop", "About"],
+        item: data,
+        info: {},
+      };
+    },
+    methods: {
+      nameClick(item) {
+        this.infoState = true;
+        this.info = item;
+      },
+    },
+    mounted() {},
+  });
+  app.mount("#app");
+</script>
