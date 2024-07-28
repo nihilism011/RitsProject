@@ -18,20 +18,33 @@
     </div>
     <div class="container">
       <div class="top-menu-bar">
-        <a v-for="menu in menuname" :key="menu">{{menu}}</a>
+        <a @click="bState='main'">Home</a>
+        <a @click="bState='keyboard'">Keyboard</a>
+        <a @click="bState='templates'">Templates</a>
       </div>
-      <div class="keyboard-sell">
-        <div v-for="(item, index) in item" :key="index" class="keyboard">
+      <div class="main-board" v-show="bState == 'main'">메인 내용</div>
+
+      <div class="keyboard-board" v-show="bState == 'keyboard'">
+        <div v-for="(item, index) in item" :key="item.name" class="keyboard">
           <div class="keybodardImg">
             <img :src="item.imgs" />
             <div class="img-click" @click="nameClick(item)">상세보기</div>
           </div>
           <h3 @click="nameClick(item)">{{item.name}}</h3>
-          <p>{{item.price}} 만원</p>
-          <button @click="item.cnt++">Click!</button>
-          <span>추천수 : {{item.cnt}}</span>
+          <p>{{item.chuk}}</p>
+          <div>
+            <button @click="item.cnt++">Click!</button>
+            <span>추천수 : {{item.cnt}}</span>
+          </div>
         </div>
       </div>
+      <div class="templates-board" v-show="bState == 'templates'"></div>
+      <button @click="darkMode" id="darkBtn">
+        <img
+          :src="isDarkMode ? './asset/dark.light.png' : './asset/night.png'"
+          alt="다크모드 전환"
+        />
+      </button>
     </div>
   </body>
 </html>
@@ -40,10 +53,12 @@
   const app = Vue.createApp({
     data() {
       return {
+        bState: "templates",
+        v: false,
         infoState: false,
-        menuname: ["Home", "Shop", "About"],
         item: data,
         info: {},
+        isDarkMode: false,
       };
     },
     methods: {
@@ -51,8 +66,14 @@
         this.infoState = true;
         this.info = item;
       },
+      darkMode() {
+        this.isDarkMode = !this.isDarkMode;
+        $("body").toggleClass("dark-mode");
+      },
     },
-    mounted() {},
+    mounted() {
+      $(".templates-board").load("./templates.html");
+    },
   });
   app.mount("#app");
 </script>

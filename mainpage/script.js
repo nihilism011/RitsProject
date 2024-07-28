@@ -1,7 +1,7 @@
 class Keyboard {
-  constructor(name, price, cnt, imgs, info) {
+  constructor(name, chuk, cnt, imgs, info) {
     this.name = name;
-    this.price = price;
+    this.chuk = chuk;
     this.cnt = cnt;
     this.imgs = imgs;
     this.infoimg = info;
@@ -10,23 +10,30 @@ class Keyboard {
 export default [
   new Keyboard(
     "바밀로-고래",
-    300,
+    "기계식",
     0,
     "./asset/바밀로-고래.jpg",
     "./asset/바밀로-고래-상세.png"
   ),
   new Keyboard(
-    "바밀로-매화(tenkeyless)",
-    256,
+    "바밀로-매화",
+    "기계식",
     0,
     "./asset/바밀로-매화.jpg",
     "./asset/바밀로-매화-상세.jpg"
   ),
   new Keyboard(
     "바밀로-코이",
-    1024,
+    "기계식",
     0,
     "./asset/바밀로-코이.jpg",
     "./asset/바밀로-코이-상세.jpg"
+  ),
+  new Keyboard(
+    "바밀로-꿈나비",
+    "기계식",
+    0,
+    "./asset/바밀로-꿈나비.jpg",
+    "./asset/바밀로-꿈나비-상세.jpg"
   ),
 ];
