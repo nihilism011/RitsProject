@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+      .btn {
+        background-color: rgb(39, 185, 39);
+        color: white;
+        padding: 15px;
+        font-size: 15px;
+        border: none;
+        cursor: pointer;
+      }
+      .menu {
+        background-color: #f9f9f9;
+        width: 150px;
+        box-shadow: 1px 3px 8px 3px #e7e3e3;
+        display: none;
+      }
+      .menu a {
+        display: block;
+        padding: 10px;
+      }
+      .top-menu {
+        display: inline-block;
+        height: 200px;
+      }
+      .top-menu:hover .menu {
+        display: block;
+      }
+      .menu a:hover {
+        background-color: #ccc;
+      }
+      a:link,
+      a:visited {
+        text-decoration: none;
+        color: black;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <button @click="abcd">click!</button>
+    </div>
+  </body>
+</html>
+<script>
+  const app = Vue.createApp({
+    data() {
+      return {
+        list: ["자바", "오라클", "html/css", "javascript"],
+      };
+    },
+    methods: {
+      abcd() {
+        for (var i = 0; i < this.list.length; i++) {
+          alert(this.list[i]);
+        }
+      },
+    },
+    mounted() {
+      // 처음 시작할 때 실행되는 부분
+    },
+  });
+  app.mount("#app");
+</script>
