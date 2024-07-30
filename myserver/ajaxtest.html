@@ -23,23 +23,13 @@
       td input {
         width: 70px;
       }
-      .txt {
-        color: blue;
-      }
-      .txt2 {
-        color: rgb(255, 0, 0);
-        font-weight: bold;
-      }
-      .bold {
-        font-weight: bold;
-      }
     </style>
   </head>
 
   <body>
     <div id="app">
       <input placeholder="검색어" v-model="keyword" @keyup.enter="fnGetList" />
-      <select v-model="sutGrade" @change="fnGetList">
+      <select v-model="sutGrade">
         <option value="">::전체::</option>
         <option value="1">1학년</option>
         <option value="2">2학년</option>
@@ -68,11 +58,8 @@
           <template v-else>
             <td>{{item.STU_NO}}</td>
             <td>{{item.STU_NAME}}</td>
-            <td :class="{bold : item.STU_DEPT == '기계'}">{{item.STU_DEPT}}</td>
-            <!-- <td :class="{txt :item.STU_GRADE == 1}">{{item.STU_GRADE}}</td> -->
-            <td :class="[item.STU_GRADE === 1 ? 'txt' : 'txt2']">
-              {{item.STU_GRADE}}
-            </td>
+            <td>{{item.STU_DEPT}}</td>
+            <td>{{item.STU_GRADE}}</td>
             <td>
               <span v-if="item.STU_GENDER == 'M'">남자</span>
               <span v-else>여자</span>
@@ -93,12 +80,11 @@
             sutGrade: "",
           };
         },
-
         methods: {
           fnGetList() {
             var self = this;
             $.ajax({
-              url: `http://localhost:3000/list?keyword=${self.keyword}&grade=${self.sutGrade}`,
+              url: `http://211.244.81.98:3000/list?keyword=${self.keyword}&grade=${self.sutGrade}`,
               dataType: "json",
               type: "GET",
               data: {},
