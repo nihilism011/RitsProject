@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="jquery-3.7.1.min.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.js"
+      integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+      crossorigin="anonymous"
+    ></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <title>Document</title>
+    <meta charset="EUC-KR" />
+    <title>Insert title here</title>
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -35,10 +38,11 @@
         color: #555;
       }
       input[type="text"],
+      input[type="password"],
       select {
         width: calc(100% - 20px);
         padding: 8px 10px;
-        margin-top: 5px;
+        margin-bottom: 5px;
         border: 1px solid #ccc;
         border-radius: 5px;
         font-size: 14px;
@@ -81,89 +85,73 @@
   </head>
   <body>
     <div id="app">
-      <h2>학생 추가</h2>
-      <div>학번</div>
+      <h2>회원가입</h2>
+      <div>ID</div>
       <div class="idInput">
-        <input type="text" v-model="id" placeholder="8자리 숫자 ex.20101105" />
+        <input
+          type="text"
+          v-model="user.id"
+          placeholder="영문,숫자 5자 이상 20자 이하"
+        />
         <button @click="checkId">중복 체크</button>
       </div>
-
-      <div>이름</div>
-      <input type="text" v-model="name" />
-      <div>학과</div>
-      <input type="text" v-model="dept" />
-      <div>학년</div>
+      <div>PASSWORD</div>
+      <input type="password" v-model="user.pwd" placeholder="6글자 이상" />
+      <div>PASSWORD CHECK</div>
+      <input type="password" v-model="pwdCheck" placeholder="비밀번호 확인" />
+      <div>NAME</div>
+      <input type="text" v-model="user.name" placeholder="이름" />
+      <div>E-mail</div>
+      <input type="text" v-model="user.email" placeholder="이메일" />
+      <div>PHONE</div>
       <div>
-        <select type="text" v-model="grade">
-          <option value="" disabled selected>학년을 선택하세요</option>
-          <option value="1">1학년</option>
-          <option value="2">2학년</option>
-          <option value="3">3학년</option>
-        </select>
+        <input type="text" v-model="user.phone" placeholder="01012345678" />
       </div>
       <div>
-        <label
-          ><input
+        <label>
+          <input
             name="gender"
             type="radio"
-            v-model="gender"
+            v-model="user.gender"
             value="M"
-          />남자</label
-        >
-        <label
-          ><input
+          />남자
+        </label>
+        <label>
+          <input
             name="gender"
             type="radio"
-            v-model="gender"
+            v-model="user.gender"
             value="L"
           />여자</label
         >
       </div>
-      <button @click="fnInsert" :disabled="!isIdUnique">제출</button>
+      <button @click="fnInsert" :disabled="!isIdUnique">회원가입</button>
     </div>
   </body>
   <script>
     const app = Vue.createApp({
       data() {
         return {
+          regex: /^[A-Za-z0-9]{5,20}$/, //영문,숫자 5자 이상 20자 이하
+          user: {
+            id: "",
+            pwd: "",
+            name: "",
+            email: "",
+            phone: "",
+            gender: "",
+          },
+          pwdCheck: "",
           idrecheck: "",
-          idList: [],
-          id: "",
-          name: "",
-          dept: "",
-          grade: "",
-          gender: "",
           isIdUnique: false,
         };
       },
-      computed: {
-        info() {
-          return {
-            id: this.id,
-            name: this.name,
-            dept: this.dept,
-            grade: this.grade,
-            gender: this.gender,
-          };
-        },
-      },
       methods: {
-        plaseid() {
-          $.ajax({
-            url: `http://localhost:3000/plsid`,
-            dataType: "json",
-            type: "GET",
-            data: {},
-            success: (data) => {
-              this.idList = data;
-            },
-          });
-        },
         checkId() {
-          const id = this.id;
+          const id = this.user.id;
           const regex = /^[0-9]*$/;
-          if (this.id.length != 8 || !regex.test(id)) {
-            alert("8자리 숫자로 입력해 주세요.");
+          if (!this.regex.test(id)) {
+            alert("영문,숫자 5자 이상 20자 이하로 만들어 주세요.");
             return;
           }
           $.ajax({
@@ -173,10 +161,10 @@
             data: { id },
             success: (data) => {
               if (data.isNo) {
-                alert("이미 있는 학번입니다.");
+                alert("이미 있는 아이디 입니다.");
                 this.isIdUnique = false;
               } else {
-                alert("사용 가능한 학번입니다.");
+                alert("사용 가능한 아이디 입니다.");
                 this.idrecheck = id;
                 this.isIdUnique = true;
               }
@@ -184,47 +172,55 @@
           });
         },
         fnInsert() {
-          const { id, name, dept, grade, gender, idList } = this;
-          if ([id, name, dept, grade, gender].some((box) => box === "")) {
+          const emailregex =
+            /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+          const regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
+          const { id, pwd, name, email, phone, gender } = this.user;
+          console.log(id, pwd, name, email, phone, gender);
+          if ([id, pwd, name, email, phone, gender].some((box) => box === "")) {
             alert("빈 칸 없이 입력해 주세요.");
+            return;
+          }
+
+          if (!this.isIdUnique || id != this.idrecheck) {
+            alert("아이디 중복 체크를 해주세요.");
+            this.isIdUnique = false;
+            return;
+          }
+          if (pwd.length < 6) {
+            alert("비밀번호는 6글자 이상 입력해주세요.");
+            return;
+          }
+          if (pwd != this.pwdCheck) {
+            alert("비밀번호와 비밀번호확인이 다릅니다.");
+            return;
+          }
+          if (!emailregex.test(email)) {
+            alert("이메일 형식에 따라 정확히 입력해주세요");
+            return;
+          }
+          if (!regPhone.test(phone)) {
+            alert("정확한 핸드폰번호를 입력해주세요");
             return;
           }
           if (!confirm("제출 하시겠습니까?")) {
             return;
           }
-          if (!this.isIdUnique) {
-            alert("학번 중복 체크를 먼저 해주세요.");
-            return;
-          }
-          if (id != this.idrecheck) {
-            alert("학번이 변경되었습니다. 다시 중복체크를 해주세요");
-            this.isIdUnique = false;
-            return;
-          }
           $.ajax({
-            url: `http://localhost:3000/insertpost`,
+            url: `http://localhost:3000/insert`,
             dataType: "json",
             type: "POST",
-            data: JSON.stringify(this.info),
+            data: JSON.stringify(this.user),
             contentType: "application/json",
             success: (data) => {
-              this.resetForm();
               alert(data.message);
+              location.href = "./main.html";
             },
           });
         },
-        resetForm() {
-          this.id = "";
-          this.name = "";
-          this.dept = "";
-          this.grade = "";
-          this.gender = "";
-          this.plaseid();
-        },
       },
-
       mounted() {
-        this.plaseid();
+        // 처음 시작할 때 실행되는 부분
       },
     });
     app.mount("#app");

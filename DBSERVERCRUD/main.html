@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.js"
+      integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f9;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      #app {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        max-width: 400px;
+        width: 100%;
+      }
+      h2 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 20px;
+      }
+      .form-group {
+        margin-bottom: 15px;
+      }
+      .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 14px;
+        color: #555;
+      }
+      .form-group input[type="text"],
+      .form-group input[type="password"] {
+        width: calc(100% - 20px);
+        padding: 8px 10px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 14px;
+      }
+      button {
+        width: 100%;
+        margin: 10px auto;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: #007bff;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+      button:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <h2>로그인</h2>
+      <div class="form-group">
+        <label for="id">ID</label>
+        <input type="text" id="id" v-model="user.id" />
+      </div>
+      <div class="form-group">
+        <label for="pwd">PASSWORD</label>
+        <input type="password" id="pwd" v-model="user.pwd" />
+      </div>
+      <button @click="fnLogin">Login!</button>
+      <button @click="fnGoInsert">회원가입</button>
+    </div>
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            user: {
+              id: "",
+              pwd: "",
+            },
+          };
+        },
+        methods: {
+          fnGoInsert() {
+            location.href = "./sample.html";
+          },
+          fnLogin() {
+            $.ajax({
+              url: `http://localhost:3000/login`,
+              dataType: "json",
+              type: "POST",
+              data: JSON.stringify(this.user),
+              contentType: "application/json",
+              success: (data) => {
+                if (data.checked) {
+                  alert("로그인 성공");
+                  location.href = "http://emfprhs011.dothome.co.kr/abc";
+                } else {
+                  alert("아이디와 비밀번호를 확인해주세요.");
+                }
+              },
+              error: (err) => {
+                console.error("로그인 오류", err);
+                alert("서버 오류가 발생했습니다.");
+              },
+            });
+          },
+        },
+        mounted() {
+          // 처음 시작할 때 실행되는 부분
+        },
+      });
+      app.mount("#app");
+    </script>
+  </body>
+</html>
