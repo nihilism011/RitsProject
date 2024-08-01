@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="jquery-3.7.1.min.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <meta charset="EUC-KR" />
+    <title>Insert title here</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-color: #f4f4f4;
+      }
+
+      #app {
+        max-width: 1200px;
+        margin: 0 auto;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+      }
+
+      input[type="text"] {
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box;
+        width: 30%;
+      }
+
+      select {
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        background-color: #fff;
+      }
+
+      button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        background-color: #007bff;
+        color: #fff;
+        cursor: pointer;
+        font-size: 16px;
+        margin-right: 10px;
+        transition: background-color 0.3s;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+      }
+
+      th,
+      td {
+        padding: 12px;
+        text-align: center;
+        border-bottom: 1px solid #ddd;
+      }
+
+      th {
+        background-color: #007bff;
+        color: #fff;
+      }
+
+      tr:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+
+      input[type="checkbox"] {
+        transform: scale(1.2);
+        margin: 0;
+      }
+
+      .insertInput {
+        margin-top: 20px;
+        padding: 10px;
+        background-color: #f9f9f9;
+        border-radius: 4px;
+      }
+
+      .insertBtn {
+        background-color: #28a745;
+      }
+
+      .insertBtn:hover {
+        background-color: #218838;
+      }
+
+      .deleteBtn {
+        background-color: #dc3545;
+      }
+
+      .deleteBtn:hover {
+        background-color: #c82333;
+      }
+
+      .updateBtn {
+        background-color: #ffc107;
+        color: #212529;
+      }
+
+      .updateBtn:hover {
+        background-color: #e0a800;
+      }
+
+      .pointClick {
+        cursor: pointer;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="app">
+      <input
+        type="text"
+        placeholder="학번 검색"
+        v-model="keyword"
+        @keyup.enter="fnGetList"
+      />
+      <select v-model="sutGrade" @change="fnGetList">
+        <option value="">::전체::</option>
+        <option value="1">1학년</option>
+        <option value="2">2학년</option>
+        <option value="3">3학년</option>
+      </select>
+      <select v-model="orderUser" @change="fnGetList">
+        <option value="STU_NO">학번</option>
+        <option value="STU_NAME">이름</option>
+        <option value="STU_DEPT">학과</option>
+      </select>
+      <label>
+        오름차순
+        <input
+          type="radio"
+          name="od"
+          v-model="iii"
+          value="ASC"
+          @change="fnGetList"
+        />
+      </label>
+      <label>
+        내림차순
+        <input
+          type="radio"
+          name="od"
+          v-model="iii"
+          value="DESC"
+          @change="fnGetList"
+        />
+      </label>
+
+      <button @click="fnGetList">검색</button>
+      <hr />
+
+      <table>
+        <tr>
+          <th>
+            <input
+              id="allCheck"
+              type="checkbox"
+              @change="toggleAll"
+              v-model="isAllSelected"
+            />
+          </th>
+          <th><label for="allCheck">학번</label></th>
+          <th>이름</th>
+          <th>학과</th>
+          <th>학년</th>
+          <th>성별</th>
+          <th></th>
+        </tr>
+        <tr v-for="(item, index) in list" :key="item.STU_NO">
+          <template v-if="item.STU_NO == updateStuNo">
+            <td></td>
+            <td>{{ item.STU_NO }}</td>
+            <td><input type="text" v-model="item.STU_NAME" /></td>
+            <td><input type="text" v-model="item.STU_DEPT" /></td>
+            <td><input type="text" v-model="item.STU_GRADE" /></td>
+            <td>
+              <select v-model="item.STU_GENDER">
+                <option value="M">남자</option>
+                <option value="F">여자</option>
+              </select>
+            </td>
+            <td>
+              <button
+                @click="fnUpdateDb(item.STU_NO, item.STU_NAME, item.STU_DEPT, item.STU_GRADE, item.STU_GENDER)"
+              >
+                저장
+              </button>
+            </td>
+          </template>
+          <template v-else>
+            <td>
+              <input
+                :id="item.STU_NO"
+                type="checkbox"
+                name="1q2w"
+                v-model="deleteNo"
+                :value="item.STU_NO"
+                @change="changeCheckBox"
+              />
+            </td>
+            <td>
+              <label :for="item.STU_NO">{{ item.STU_NO }}</label>
+            </td>
+            <td class="pointClick" @click="fnInfo(item.STU_NO)">
+              {{ item.STU_NAME }}
+            </td>
+            <td>{{ item.STU_DEPT }}</td>
+            <td>{{ item.STU_GRADE }}</td>
+            <td>
+              <span v-if="item.STU_GENDER == 'M'">남자</span>
+              <span v-else>여자</span>
+            </td>
+            <td>
+              <button class="updateBtn" @click="fnUpdate(item.STU_NO)">
+                수정
+              </button>
+            </td>
+          </template>
+        </tr>
+      </table>
+      <button class="deleteBtn" @click="fnRemove">삭제</button>
+      <div class="insertInput">
+        <table>
+          <tr>
+            <th>학번</th>
+            <th>이름</th>
+            <th>학과</th>
+            <th>학년</th>
+            <th>성별</th>
+          </tr>
+          <tr>
+            <td><input type="text" v-model="newStudent.STU_NO" /></td>
+            <td><input type="text" v-model="newStudent.STU_NAME" /></td>
+            <td><input type="text" v-model="newStudent.STU_DEPT" /></td>
+            <td><input type="text" v-model="newStudent.STU_GRADE" /></td>
+            <td>
+              <select v-model="newStudent.STU_GENDER">
+                <option value="M">남자</option>
+                <option value="F">여자</option>
+              </select>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <button class="insertBtn" @click="fnInsert">추가</button>
+    </div>
+
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            deleteNo: [],
+            list: [],
+            keyword: "",
+            updateStuNo: "",
+            sutGrade: "",
+            isAllSelected: false,
+            iii: "",
+            orderUser: "STU_NO",
+            newStudent: {
+              STU_NO: "",
+              STU_NAME: "",
+              STU_DEPT: "",
+              STU_GRADE: "",
+              STU_GENDER: "",
+            },
+          };
+        },
+        methods: {
+          fnInfo(stuN) {
+            location.href = `info.html?stuN=${stuN}`;
+          },
+          toggleAll() {
+            if (this.isAllSelected) {
+              this.deleteNo = this.list.map((item) => item.STU_NO);
+            } else {
+              this.deleteNo = [];
+            }
+          },
+          changeCheckBox() {
+            this.isAllSelected = this.deleteNo.length === this.list.length;
+          },
+          fnGetList() {
+            $.ajax({
+              url: "http://localhost:3000/list",
+              type: "GET",
+              data: {
+                keyword: this.keyword,
+                grade: this.sutGrade,
+                kkk: this.orderUser,
+                iii: this.iii,
+              },
+              success: (data) => {
+                this.list = data;
+                this.deleteNo = [];
+                this.isAllSelected = false;
+              },
+            });
+          },
+          fnUpdate(stuNo) {
+            this.updateStuNo = stuNo;
+          },
+          fnRemove() {
+            var stuNo = this.deleteNo;
+            if (!confirm("정말 삭제하시겠습니까?!??!??")) {
+              return;
+            }
+            $.ajax({
+              url: `http://localhost:3000/delete?stuNo=${stuNo}`,
+              dataType: "json",
+              type: "GET",
+              success: (data) => {
+                alert(data[0].message);
+                this.fnGetList();
+              },
+            });
+          },
+          fnUpdateDb(stuNo, name, dept, grade, gender) {
+            if (!confirm("수정하시겠습니까?!??!??!")) {
+              return;
+            }
+            $.ajax({
+              url: `http://localhost:3000/update?stuNo=${stuNo}&name=${name}&dept=${dept}&grade=${grade}&gender=${gender}`,
+              dataType: "json",
+              type: "GET",
+              success: (data) => {
+                alert(data[0].message);
+                this.fnGetList();
+                this.updateStuNo = "";
+              },
+            });
+          },
+          fnInsert() {
+            if (
+              !this.newStudent.STU_NO ||
+              !this.newStudent.STU_NAME ||
+              !this.newStudent.STU_DEPT ||
+              !this.newStudent.STU_GRADE ||
+              !this.newStudent.STU_GENDER
+            ) {
+              alert("모든 필드를 입력해주세요.");
+              return;
+            }
+            $.ajax({
+              url: `http://localhost:3000/insert`,
+              type: "POST",
+              data: this.newStudent,
+              success: (data) => {
+                alert(data[0].message);
+                this.fnGetList();
+                this.newStudent = {
+                  STU_NO: "",
+                  STU_NAME: "",
+                  STU_DEPT: "",
+                  STU_GRADE: "",
+                  STU_GENDER: "",
+                };
+              },
+            });
+          },
+        },
+        mounted() {
+          this.fnGetList();
+        },
+      });
+      app.mount("#app");
+    </script>
+  </body>
+</html>

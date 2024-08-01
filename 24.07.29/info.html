@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="jquery-3.7.1.min.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <meta charset="EUC-KR" />
+    <title>Insert title here</title>
+    <style></style>
+  </head>
+
+  <body>
+    <div id="app">{{stuNo}}</div>
+
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            stuNo: "",
+          };
+        },
+        methods: {},
+        mounted() {
+          const queryParams = new URLSearchParams(window.location.search);
+          this.stuNo = queryParams.get("stuN") || "";
+        },
+      });
+      app.mount("#app");
+    </script>
+  </body>
+</html>

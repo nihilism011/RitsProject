@@ -49,6 +49,7 @@
       <hr />
       <table>
         <tr>
+          <th>체크</th>
           <th>학번</th>
           <th>이름</th>
           <th>학과</th>
@@ -56,35 +57,54 @@
           <th>성별</th>
           <th></th>
         </tr>
-        <tr v-for="item in list">
+        <tr v-for="item in list" :key="item.STU_NO">
           <template v-if="item.STU_NO == updateStuNo">
-            <td>{{item.STU_NO}}</td>
+            <td></td>
+            <td>{{ item.STU_NO }}</td>
             <td><input v-model="item.STU_NAME" /></td>
             <td><input v-model="item.STU_DEPT" /></td>
             <td><input v-model="item.STU_GRADE" /></td>
             <td><input v-model="item.STU_GENDER" /></td>
             <td>
               <button
-                @click="fnUpdateDb(item.STU_NO,item.STU_NAME,item.STU_DEPT,item.STU_GRADE,item.STU_GENDER)"
+                @click="fnUpdateDb(item.STU_NO, item.STU_NAME, item.STU_DEPT, item.STU_GRADE, item.STU_GENDER)"
               >
                 저장
               </button>
             </td>
           </template>
           <template v-else>
-            <td>{{item.STU_NO}}</td>
-            <td>{{item.STU_NAME}}</td>
-            <td>{{item.STU_DEPT}}</td>
-            <td>{{item.STU_GRADE}}</td>
+            <td>
+              <input
+                :id="item.STU_NO"
+                type="radio"
+                name="1q2w"
+                v-model="deleteNo"
+                :value="item.STU_NO"
+              />
+            </td>
+            <td>
+              <label :for="item.STU_NO">{{ item.STU_NO }}</label>
+            </td>
+            <td>{{ item.STU_NAME }}</td>
+            <td>{{ item.STU_DEPT }}</td>
+            <td>{{ item.STU_GRADE }}</td>
             <td>
               <span v-if="item.STU_GENDER == 'M'">남자</span>
               <span v-else>여자</span>
             </td>
             <td><button @click="fnUpdate(item.STU_NO)">수정</button></td>
           </template>
-          <td>
-            <button @click="fnRemove(item.STU_NO, item.STU_NAME)">삭제</button>
-          </td>
+        </tr>
+      </table>
+      <button @click="fnRemove">삭제</button>
+      <table>
+        <tr>
+          <th>학번</th>
+          <th>이름</th>
+          <th>학과</th>
+          <th>학년</th>
+          <th>성별</th>
         </tr>
       </table>
     </div>
@@ -93,6 +113,7 @@
       const app = Vue.createApp({
         data() {
           return {
+            deleteNo: "",
             list: [],
             keyword: "",
             updateStuNo: "",
@@ -100,15 +121,16 @@
           };
         },
         methods: {
+          fnCheckId(stuNo) {
+            this.deleteNo = stuNo;
+          },
           fnGetList() {
-            var self = this;
             $.ajax({
-              url: `http://localhost:3000/list?keyword=${self.keyword}&grade=${self.sutGrade}`,
+              url: `http://localhost:3000/list?keyword=${this.keyword}&grade=${this.sutGrade}`,
               dataType: "json",
               type: "GET",
-              data: {},
-              success: function (data) {
-                self.list = data;
+              success: (data) => {
+                this.list = data;
                 console.log(data);
               },
             });
@@ -117,8 +139,8 @@
             console.log(stuNo);
             this.updateStuNo = stuNo;
           },
-          fnRemove(stuNo, stuName) {
-            var self = this;
+          fnRemove() {
+            var stuNo = this.deleteNo;
             if (!confirm("정말 삭제하시겠습니까?!??!??")) {
               return;
             }
@@ -126,15 +148,13 @@
               url: `http://localhost:3000/delete?stuNo=${stuNo}`,
               dataType: "json",
               type: "GET",
-              data: {},
-              success: function (data) {
+              success: (data) => {
                 alert(data[0].message);
-                self.fnGetList();
+                this.fnGetList();
               },
             });
           },
           fnUpdateDb(stuNo, name, dept, grade, gender) {
-            var self = this;
             if (!confirm("수정하시겠습니까?!??!??!")) {
               return;
             }
@@ -142,17 +162,15 @@
               url: `http://localhost:3000/update?stuNo=${stuNo}&name=${name}&dept=${dept}&grade=${grade}&gender=${gender}`,
               dataType: "json",
               type: "GET",
-              data: {},
-              success: function (data) {
+              success: (data) => {
                 alert(data[0].message);
-                self.fnGetList();
-                self.updateStuNo = "";
+                this.fnGetList();
+                this.updateStuNo = "";
               },
             });
           },
         },
         mounted() {
-          // 처음 화면이 실행될때 호출할 부분
           this.fnGetList();
         },
       });
